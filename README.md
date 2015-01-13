@@ -3,7 +3,7 @@
 
 
 ###Getting Started
-**Note: Vundle Compatible.**<br /> 
+**Note: [Vundle Compatible](https://github.com/gmarik/Vundle.vim).**<br /> 
 add `Plugin 'webguywalker/vimwalker'` to .vimrc file and run: `:PluginInstall vimwalker.vim`
 
 **Manually:**<br />
