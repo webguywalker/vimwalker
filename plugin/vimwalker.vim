@@ -10,7 +10,7 @@
 
 " Variables
 let g:cwd = getcwd()
-let g:realtime = expand('<sfile>:p:h:h:h') . '/vm/app/precise/realtime-ng'
+let g:isGitRepo = isdirectory(g:cwd . '/.git')
 
 """
 "" Git Restore Vim Tabs
@@ -18,19 +18,18 @@ let g:realtime = expand('<sfile>:p:h:h:h') . '/vm/app/precise/realtime-ng'
 """
 function g:GitRestoreVimTabs(...)
 
-	:if g:cwd == g:realtime
+	:if g:isGitRepo
 
 		:silent ! git status | php -r '$gitstatus = file_get_contents("php://stdin"); preg_match_all("/(?<=modified:\s{3})([a-zA-Z\/_.]+)/m",$gitstatus,$matches); $matches = array_unique($matches[0]); echo implode("\n",$matches)."\n";' > /tmp/gitmodifiedfiles.txt
 		:let wholefile = readfile("/tmp/gitmodifiedfiles.txt")
 		
 		:for line in wholefile
 		:	let run = ':tabedit ' . line
-		:	echo run
 		:	execute run
 		:endfor
 
 	:else 
-		:echom 'Please: Move into the app directory - ' . g:realtime
+		:echom 'Please: Move into the Top-Level of a Git Repo'
 	:endif
 
 endfunction
