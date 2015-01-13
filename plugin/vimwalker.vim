@@ -10,10 +10,10 @@
 
 " Variables
 let g:cwd = getcwd()
-let g:realtime = '/Users/jamarwalker/vm/app/precise/realtime-ng'
+let g:realtime = expand('<sfile>:p:h:h:h') . '/vm/app/precise/realtime-ng'
 
 """
-"" Global: Git Restore Vim Tabs
+"" Git Restore Vim Tabs
 "" Uses `git status` to figure out Modified Files and opens them in Vim Tabs
 """
 function g:GitRestoreVimTabs(...)
