@@ -7,10 +7,16 @@
 "@requires	PHP 5.3+, PHP-CLI enabled
 """""""""""
 
+" Helpers
+function g:isInGitRepo(...)
+:	let g:ok = expand(g:cwd).';'
+:	let g:found = finddir('.git', g:ok)
+:	return isdirectory(g:found)
+endfunction
 
 " Variables
-let g:cwd = getcwd()
-let g:isGitRepo = isdirectory(g:cwd . '/.git')
+:let g:cwd = getcwd()
+:let g:found_git_repo = g:isInGitRepo()
 
 """
 "" Git Restore Vim Tabs
@@ -18,7 +24,7 @@ let g:isGitRepo = isdirectory(g:cwd . '/.git')
 """
 function g:GitRestoreVimTabs(...)
 
-	:if g:isGitRepo
+	:if g:found_git_repo
 
 		:silent ! git status | php -r '$gitstatus = file_get_contents("php://stdin"); preg_match_all("/(?<=modified:\s{3})([a-zA-Z\/_.]+)/m",$gitstatus,$matches); $matches = array_unique($matches[0]); echo implode("\n",$matches)."\n";' > /tmp/gitmodifiedfiles.txt
 		:let wholefile = readfile("/tmp/gitmodifiedfiles.txt")
@@ -29,7 +35,7 @@ function g:GitRestoreVimTabs(...)
 		:endfor
 
 	:else 
-		:echom 'Please: Move into the Top-Level of a Git Repo'
+		:echom 'Please: Move into a Git Repo, hint: cd ~/a/git/repo'
 	:endif
 
 endfunction
