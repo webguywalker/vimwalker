@@ -4,19 +4,19 @@
 "
 "@author	Jamar A. Walker
 "@date		01/13/2015
-"@requires	PHP 5.3+, PHP-CLI enabled
+"@requires	Git 1.9+
 """""""""""
 
 " Helpers
-function g:isInGitRepo(...)
-:	let g:ok = expand(g:cwd).';'
-:	let g:found = finddir('.git', g:ok)
-:	return isdirectory(g:found)
+function s:isInGitRepo(...)
+:	let l:ok = expand(s:cwd).';'
+:	let l:found = finddir('.git', l:ok)
+:	return isdirectory(l:found)
 endfunction
 
 " Variables
-:let g:cwd = getcwd()
-:let g:found_git_repo = g:isInGitRepo()
+:let s:cwd = getcwd()
+:let s:found_git_repo = s:isInGitRepo()
 
 """
 "" Git Restore Vim Tabs
@@ -24,17 +24,17 @@ endfunction
 """
 function g:GitRestoreVimTabs(...)
 
-	:if g:found_git_repo
+	:if s:found_git_repo
 
-		:silent ! git status | php -r '$gitstatus = file_get_contents("php://stdin"); preg_match_all("/(?<=modified:\s{3})([a-zA-Z\/_.]+)/m",$gitstatus,$matches); $matches = array_unique($matches[0]); echo implode("\n",$matches)."\n";' > /tmp/gitmodifiedfiles.txt
-		:let wholefile = readfile("/tmp/gitmodifiedfiles.txt")
+		:let l:modified_files = system('git ls-files -m')
+		:let l:modified_files_list = split(l:modified_files, '\n')
 		
-		:for line in wholefile
-		:	let run = ':tabedit ' . line
-		:	execute run
+		:for line in l:modified_files_list
+		:	let l:run = ':tabedit ' . line
+		:	execute l:run
 		:endfor
 
-	:else 
+	:else
 		:echom 'Please: Move into a Git Repo, hint: cd ~/a/git/repo'
 	:endif
 
