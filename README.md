@@ -1,9 +1,11 @@
-# VIM Walker
+# VIM Walker [![Build Status](https://travis-ci.org/webguywalker/vimwalker.svg?branch=master)](https://travis-ci.org/webguywalker/vimwalker)
 >A collection of useful vim functions (vimscipts) that aren't ready to be packaged as individual plugins, but are grouped into this single plugin until they find a home.<br />
-
 **Note: [Vundle](https://github.com/gmarik/Vundle.vim)/[Pathogen](https://github.com/tpope/vim-pathogen) Compatible.**<br />
+<br />
+<br />
 
 ### Git Restore Vim Tabs
+`:call g:GitRestoreVimTabs()`
 - have you every had to stash files, make a change, and had to reopen all those vim tabs again?
 - started coding, stopped, and had to pickup where you left off?
 - computer shutdown due to some type of failure or you just closed terminal by mistake? 
@@ -12,7 +14,9 @@
 **Description:** While you're in a directory that's apart of a git repo it will look at your modified files in your Working Tree and reopen them all in Vim Tabs.
 
 ### Git Branch Clean-Up
-> This command will use regex to step you through an interactive prompt to remove old git branches
+`:call g:GitBranchCleanUp()`
+> This command will use regex to step you through an interactive prompt to remove old git branches. <br />
+> UI/UX could be simialr to `git rebase -i`, use regex to filter branches loaded into buffer and in vim the user will select what branch to keep/rename/delete
 
 <br />
 <hr />
