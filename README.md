@@ -13,11 +13,6 @@
 **Solution:**  Open `vim` and run `:call g:GitRestoreVimTabs()` <br />
 **Description:** While you're in a directory that's apart of a git repo it will look at your modified files in your Working Tree and reopen them all in Vim Tabs.
 
-### Git Branch Clean-Up
-`:call g:GitBranchCleanUp()`
-> This command will use regex to step you through an interactive prompt to remove old git branches. <br />
-> UI/UX could be simialr to `git rebase -i`, use regex to filter branches loaded into buffer and in vim the user will select what branch to keep/rename/delete
-
 <br />
 <hr />
 <br />
